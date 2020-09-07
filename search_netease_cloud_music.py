@@ -86,7 +86,7 @@ def request(method, path, params={},  custom_cookies={}):
         resp = httpx.request(method, endpoint, data=params,
                              cookies=cookie, timeout=3)
         data = resp.json()
-    finally:
+    except Exception:
         return data
 
 
