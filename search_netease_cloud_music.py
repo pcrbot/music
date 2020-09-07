@@ -49,14 +49,16 @@ def create_key(size):
 
 
 # 搜索单曲(1)，歌手(100)，专辑(10)，歌单(1000)，用户(1002) *(type)*
-def search(keywords, stype=1, offset=0, total="true", limit=50):
+def search(
+        keywords, stype=1, offset=0,
+        total="true", limit=50, result_num: int = 3):
     song_list = []
     path = "/weapi/search/get"
     params = dict(s=keywords, type=stype, offset=offset,
                   total=total, limit=limit)
     data = request('POST', path, params)
-    if data:
-        for item in data['result']['songs'][:3]:
+    if data and data['code'] == 200:
+        for item in data['result']['songs'][:result_num]:
             song_list.append(
                 {
                     'name': item['name'],
@@ -68,7 +70,7 @@ def search(keywords, stype=1, offset=0, total="true", limit=50):
                 }
             )
         return song_list
-    return data
+    return song_list
 
 
 def request(method, path, params={},  custom_cookies={}):
