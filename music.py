@@ -11,9 +11,9 @@ sv = Service(
     'music',
     enable_on_default=True,
     visible=True,
-    help_="[点歌 好日子]搜索歌曲"
-          "[搜网易 好日子]搜索网易云"
-          "[搜QQ 好日子]搜索QQ音乐",
+    help_="[点歌 好日子] 混合搜索\n"
+          "[搜网易 好日子] 搜索网易云\n"
+          "[搜QQ 好日子] 搜索QQ音乐",
     bundle='pcr娱乐'
 )
 
