@@ -8,19 +8,25 @@
 
 如遇使用问题欢迎提交Issue。
 
-*2020/9/7* 已支持单独搜索网易和QQ，使用点歌命令时标注歌曲来源。
+*2020/9/8*
 
-*2020/9/7* 修复了查询失败时的处理机制，使用新版`go-cqhttp`时分享QQ音乐能够显示歌手。
+- 更换网易云搜索API，暂不确定请求过于频繁时是否稳定，请不要过度使用。
+- 删除对`pycryptodomex`的依赖。
+- 非点歌成员使用`[选xx]`关键字仅在距离群内上一次点歌不超过2分钟时才会触发提示，避免日常对话误触。
+- 每位成员使用点歌添加3分钟（约一首歌时间)冷却期（避免滥用）。
+
+*2020/9/7*
+
+- 已支持单独搜索网易和QQ，使用点歌命令时标注歌曲来源。
+- 修复了查询失败时的处理机制，使用新版`go-cqhttp`时分享QQ音乐能够显示歌手。
 
 ## 安装
 
 输入以下命令安装所需依赖:
 
 ```shell
-python3.8 -m pip install httpx pycryptodomex
+python3.8 -m pip install httpx
 ```
-
-**Windows用户请看 [Installation — PyCryptodome 3.9.8 documentation](https://pycryptodome.readthedocs.io/en/latest/src/installation.html#windows-from-sources-python-3-5-and-newer)**
 
 下载或克隆本项目，将`music`文件夹放入`modules`文件夹中，并在`config/__bot__.py`的模块列表里加入`music`。
 
