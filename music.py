@@ -56,10 +56,10 @@ async def choose_song(bot, ev):
                         }
                     )
                 await bot.send(ev, music)
-                del temp[key]
-                del last_check[str(ev.group_id)]
-            # else:
-            #     await bot.send(ev, '只能选择列表中有的歌曲哦', at_sender=True)
+        del temp[key]
+        del last_check[str(ev.group_id)]
+        # else:
+        #     await bot.send(ev, '只能选择列表中有的歌曲哦', at_sender=True)
 
 
 @sv.on_prefix(('点歌', '搜歌曲'))
