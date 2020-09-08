@@ -1,9 +1,12 @@
 """
-Reference link: https://github.com/bluetomlee/NetEase-MusicBox/blob/master/src/api.py
+Reference link:
+https://github.com/bluetomlee/NetEase-MusicBox/blob/master/src/api.py
 """
 import json
 
 import httpx
+
+from hoshino import logger
 
 
 class NetEase:
@@ -16,13 +19,15 @@ class NetEase:
             'Content-Type': 'application/x-www-form-urlencoded',
             'Host': 'music.163.com',
             'Referer': 'http://music.163.com/search/',
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) '
+            + 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 '
+            + 'Safari/537.36'
         }
         self.cookies = {
             'appver': '1.5.2'
         }
 
-    def httpRequest(self, method, action, query=None, urlencoded=None, callback=None, timeout=None):
+    def httpRequest(self, action, query=None):
         connection = httpx.post(
             action,
             data=query,
@@ -34,7 +39,7 @@ class NetEase:
         connection = json.loads(connection.text)
         return connection
 
-    def search(self, s, stype=1, offset=0, total='true', limit=60):
+    def search(self, s, stype=1, offset=0, total='true'):
         action = 'http://music.163.com/api/search/get/web'
         data = {
             's': s,
@@ -43,7 +48,7 @@ class NetEase:
             'total': total,
             'limit': 60
         }
-        return self.httpRequest('POST', action, data)
+        return self.httpRequest(action, data)
 
 
 def search(keyword: str, result_num: int = 3):
@@ -51,18 +56,21 @@ def search(keyword: str, result_num: int = 3):
     song_list = []
     data = n.search(keyword)
     if data and data['code'] == 200:
-        for item in data['result']['songs'][:result_num]:
-            song_list.append(
-                {
-                    'name': item['name'],
-                    'id': item['id'],
-                    'artists': ' '.join(
-                        [artist['name'] for artist in item['artists']]
-                    ),
-                    'type': '163'
-                }
-            )
-        return song_list
+        try:
+            for item in data['result']['songs'][:result_num]:
+                song_list.append(
+                    {
+                        'name': item['name'],
+                        'id': item['id'],
+                        'artists': ' '.join(
+                            [artist['name'] for artist in item['artists']]
+                        ),
+                        'type': '163'
+                    }
+                )
+            return song_list
+        except Exception as e:
+            logger.error(f'获取网易云歌曲失败, 返回数据data={data}, 错误信息error={e}')
     return song_list
 
 
