@@ -22,8 +22,8 @@ class NetEase:
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) '
             + 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 '
             + 'Safari/537.36',
-            'X-Real-IP': '此处替换为一个国内IP',
-            'X-Forwarded-For': '与上方IP相同',
+            # 'X-Real-IP': '此处替换为一个国内IP',
+            # 'X-Forwarded-For': '与上方IP相同',
         }
         self.cookies = {
             'appver': '1.5.2'
