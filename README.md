@@ -4,7 +4,7 @@
 
 这是一个适用于Hoshino v2的点歌插件,支持搜索并分享QQ音乐和网易云音乐。
 
-<img src="https://img.shields.io/badge/HoshinoBot-v2.0-lightgreen"/> <img src="https://img.shields.io/badge/cqhttp--mirai-v0.2.3-lightgrey" /> <img src="https://img.shields.io/badge/go--cqhttp-v0.9.24-lightgrey" /> <img src="https://img.shields.io/badge/built_by---LAN---9cf"/>
+<img src="https://img.shields.io/badge/HoshinoBot-v2.0-brightgreen"/> <img src="https://img.shields.io/badge/cqhttp--mirai-v0.2.3-brightgreen" /> <img src="https://img.shields.io/badge/go--cqhttp-v0.9.24-brightgreen" /> <img src="https://img.shields.io/badge/built_by---LAN---blue"/>
 
 
 ## 说明
