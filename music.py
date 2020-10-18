@@ -184,7 +184,7 @@ async def search_qq_music(bot, ev):
 
 
 @sv.on_prefix(('搜migu', '搜migu音乐', '搜咪咕音乐'))
-async def search_qq_music(bot, ev):
+async def search_migu_music(bot, ev):
     if str(ev.user_id) in last_check:
         intervals = datetime.datetime.now() - last_check[str(ev.user_id)]
         if intervals < cool_down:

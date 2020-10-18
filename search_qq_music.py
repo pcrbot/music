@@ -23,18 +23,22 @@ async def search(keyword, result_num: int = 3):
         res_data = await resp.json()
     except Exception as e:
         logger.error(f'Request QQ Music Timeout {e}')
-        return None
-    for item in res_data['data']['song']['list'][:result_num]:
-        song_list.append(
-            {
-                'name': item['songname'],
-                'id': item['songid'],
-                'artists': ' '.join(
-                    artist['name'] for artist in item['singer']
-                ),
-                'type': 'qq'
-            }
-        )
+        return []
+    try:
+        for item in res_data['data']['song']['list'][:result_num]:
+            song_list.append(
+                {
+                    'name': item['songname'],
+                    'id': item['songid'],
+                    'artists': ' '.join(
+                        artist['name'] for artist in item['singer']
+                    ),
+                    'type': 'qq'
+                }
+            )
+    except Exception as e:
+        logger.info(f"未从QQ音乐获取到关键词为{keyword}的音乐")
+
     return song_list
 
 

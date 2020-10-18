@@ -5,7 +5,6 @@ USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/
 
 async def search(keyword, result_num: int = 3):
     """ 搜索音乐 """
-    number = 5
     song_list = []
     # ?rows=20&type=2&keyword=稻香&pgc=1
 
@@ -22,19 +21,23 @@ async def search(keyword, result_num: int = 3):
         res_data = await resp.json()
     except Exception as e:
         logger.error(f'Request Migu Music Timeout {e}')
-        return None
-    for item in res_data['musics'][:result_num]:
-        song_list.append(
-            {
-                'url': 'https://music.migu.cn/v3/music/song/' + item['copyrightId'],
-                'purl': item['mp3'],
-                'image': item['cover'],
-                'title': item['songName'],
-                'content': item['singerName'],
-                'name': item['songName'],
-                'artists': item['singerName'],
-                'type': 'custom',
-                'subtype': 'migu'
-            }
-        )
+        return []
+    try:
+        for item in res_data['musics'][:result_num]:
+            song_list.append(
+                {
+                    'url': 'https://music.migu.cn/v3/music/song/' + item['copyrightId'],
+                    'purl': item['mp3'],
+                    'image': item['cover'],
+                    'title': item['songName'],
+                    'content': item['singerName'],
+                    'name': item['songName'],
+                    'artists': item['singerName'],
+                    'type': 'custom',
+                    'subtype': 'migu'
+                }
+            )
+    except:
+        logger.info(f"未从咪咕音乐获取到关键词为{keyword}的音乐")
+
     return song_list
