@@ -14,9 +14,9 @@ sv = Service(
     enable_on_default=True,
     visible=True,
     help_="[点歌 好日子] 混合搜索\n"
-          "[搜网易 好日子] 搜索网易云\n"
-          "[搜QQ 好日子] 搜索QQ音乐\n"
-          "[搜咪咕 好日子] 搜索咪咕音乐",
+          "[搜网易云 好日子] 搜索网易云\n"
+          "[搜QQ音乐 好日子] 搜索QQ音乐\n"
+          "[搜咪咕音乐 好日子] 搜索咪咕音乐",
     bundle='pcr娱乐'
 )
 
@@ -111,7 +111,7 @@ async def to_apply_for_title(bot, ev):
             await bot.send(ev, '什么也没有找到的说OxO')
 
 
-@sv.on_prefix(('搜网易', '搜163', '搜网易云'))
+@sv.on_prefix(('搜163', '搜网易云'))
 async def search_netease_cloud_music(bot, ev):
     if str(ev.user_id) in last_check:
         intervals = datetime.datetime.now() - last_check[str(ev.user_id)]
@@ -147,7 +147,7 @@ async def search_netease_cloud_music(bot, ev):
             await bot.send(ev, '什么也没有找到的说OxO')
 
 
-@sv.on_prefix(('搜qq', '搜QQ', '搜qq音乐', '搜QQ音乐'))
+@sv.on_prefix(('搜qq音乐', '搜QQ音乐'))
 async def search_qq_music(bot, ev):
     if str(ev.user_id) in last_check:
         intervals = datetime.datetime.now() - last_check[str(ev.user_id)]
@@ -183,7 +183,7 @@ async def search_qq_music(bot, ev):
             await bot.send(ev, '什么也没有找到的说OxO')
 
 
-@sv.on_prefix(('搜migu', '搜migu音乐', '搜咪咕音乐', '搜咪咕'))
+@sv.on_prefix(('搜migu', '搜migu音乐', '搜咪咕音乐'))
 async def search_qq_music(bot, ev):
     if str(ev.user_id) in last_check:
         intervals = datetime.datetime.now() - last_check[str(ev.user_id)]
