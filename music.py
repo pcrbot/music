@@ -16,7 +16,7 @@ sv = Service(
     help_="[点歌 好日子] 混合搜索\n"
           "[搜网易 好日子] 搜索网易云\n"
           "[搜QQ 好日子] 搜索QQ音乐\n"
-          "[搜migu 好日子] 搜索咪咕音乐",
+          "[搜咪咕 好日子] 搜索咪咕音乐",
     bundle='pcr娱乐'
 )
 
@@ -96,7 +96,7 @@ async def to_apply_for_title(bot, ev):
                     msg.append('=== QQ 音乐 ===')
                     flag = False
                 if song['type'] == 'custom' and song['subtype'] == 'migu' and flag2:
-                    msg.append('=== 咪咕 音乐 ===')
+                    msg.append('=== 咪咕音乐 ===')
                     flag2 = False
                 msg.append(
                     f'{idx}. {song["name"]} - {song["artists"]}'
@@ -183,7 +183,7 @@ async def search_qq_music(bot, ev):
             await bot.send(ev, '什么也没有找到的说OxO')
 
 
-@sv.on_prefix(('搜migu', '搜migu音乐', '搜咪咕音乐'))
+@sv.on_prefix(('搜migu', '搜migu音乐', '搜咪咕音乐', '搜咪咕'))
 async def search_qq_music(bot, ev):
     if str(ev.user_id) in last_check:
         intervals = datetime.datetime.now() - last_check[str(ev.user_id)]
