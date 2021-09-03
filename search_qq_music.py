@@ -1,21 +1,25 @@
 from hoshino import logger, aiorequests
 
-USER_AGENT = "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1"
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36"
 
 
 async def search(keyword, result_num: int = 3):
     """ 搜索音乐 """
     number = 5
     song_list = []
-    params = {"w": keyword, "format": "json", "p": 0, "n": number}
+    params = {"w": keyword, "format": "json", "p": "1", "n": number}
 
     headers = {
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Charset": "UTF-8,*;q=0.5",
+        "Accept-Encoding": "gzip,deflate,sdch",
+        "Accept-Language": "en-US,en;q=0.8",
         "referer": "http://m.y.qq.com",
         "User-Agent": USER_AGENT
     }
     try:
         resp = await aiorequests.get(
-            url="http://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp",
+            url="https://c.y.qq.com/soso/fcgi-bin/client_search_cp",
             params=params,
             headers=headers,
             timeout=3
