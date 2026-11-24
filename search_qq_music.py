@@ -30,14 +30,20 @@ async def search(keyword, result_num: int = 3):
         return None
     try:
         for item in res_data['data']['song']['list'][:result_num]:
+            artists = ' '.join(
+                artist['name'] for artist in item['singer']
+            )
+            # NapCat 默认签名服务已关闭 QQ 音乐 id 解析(返回纯文本), 只能发 custom 卡片
             song_list.append(
                 {
+                    'url': 'https://y.qq.com/n/ryqq/songDetail/' + item['songmid'],
+                    'image': 'https://y.gtimg.cn/music/photo_new/T002R500x500M000' + item['albummid'] + '.jpg',
+                    'title': item['songname'],
+                    'content': artists,
                     'name': item['songname'],
-                    'id': item['songid'],
-                    'artists': ' '.join(
-                        artist['name'] for artist in item['singer']
-                    ),
-                    'type': 'qq'
+                    'artists': artists,
+                    'type': 'custom',
+                    'subtype': 'qq'
                 }
             )
         return song_list
